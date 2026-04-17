@@ -63,7 +63,7 @@
         },
         {
           "type": "fill-blank",
-          "ageTier": "15-20",
+          "ageTier": "15+",
           "prompt": "What year was Anna, the species-reviving Mexican grey wolf, born?",
           "answer": "2001",
           "scan": {

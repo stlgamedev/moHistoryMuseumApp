@@ -1,7 +1,11 @@
 import { signal, computed, effect } from "@preact/signals";
 import type { Section } from "../content/types";
-import { AGE_TIER_RANGES, type AgeTier } from "../content/types";
+import { AGE_TIERS, AGE_TIER_RANGES, type AgeTier } from "../content/types";
 import { loadPersisted, savePersisted, resetPersisted, type PersistedState } from "./storage";
+
+function validTier(value: string | undefined): AgeTier | undefined {
+  return value && (AGE_TIERS as string[]).includes(value) ? (value as AgeTier) : undefined;
+}
 
 export type Screen =
   | { kind: "welcome" }
@@ -19,7 +23,7 @@ const persisted = loadPersisted();
 
 export const screen = signal<Screen>({ kind: "welcome" });
 export const age = signal<number | undefined>(persisted.age);
-export const ageTier = signal<AgeTier | undefined>(persisted.ageTier as AgeTier | undefined);
+export const ageTier = signal<AgeTier | undefined>(validTier(persisted.ageTier));
 export const earnedPatches = signal<Set<string>>(new Set(persisted.earnedPatches));
 export const completedQuestions = signal<Set<string>>(new Set(persisted.completedQuestions));
 export const sections = signal<Section[]>([]);
@@ -54,7 +58,7 @@ function tierFor(years: number): AgeTier {
   if (years <= 5) return "3-5";
   if (years <= 10) return "5-10";
   if (years <= 15) return "10-15";
-  return "15-20";
+  return "15+";
 }
 
 export function selectAgeTier(tier: AgeTier): void {
