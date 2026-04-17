@@ -1,6 +1,8 @@
 import { useEffect } from "preact/hooks";
 import { screen, sections } from "./state/game";
 import { loadSectionIndex, loadSection } from "./content/loader";
+import { loadConfig } from "./state/config";
+import { initRouter } from "./state/router";
 import { MenuButton } from "./components/MenuButton";
 import { Welcome } from "./screens/Welcome";
 import { About } from "./screens/About";
@@ -16,6 +18,8 @@ import { Inventory } from "./screens/Inventory";
 export function App() {
   useEffect(() => {
     (async () => {
+      await loadConfig();
+      initRouter();
       try {
         const index = await loadSectionIndex();
         const loaded = await Promise.all(

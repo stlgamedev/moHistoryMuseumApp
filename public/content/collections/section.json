@@ -19,7 +19,15 @@
             { "label": "Anna", "image": "images/choice-anna.svg", "correct": true },
             { "label": "Jack", "image": "images/choice-jack.svg" },
             { "label": "Beverly", "image": "images/choice-beverly.svg" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find a wolf somewhere in the museum!",
+            "hintText": "Taxidermy, painting, or model — any wolf counts.",
+            "verification": {
+              "kind": "object",
+              "classes": ["timber wolf", "white wolf", "grey wolf", "gray wolf", "red wolf"]
+            }
+          }
         },
         {
           "type": "multi-text",
@@ -29,19 +37,43 @@
             { "label": "Wolf", "correct": true },
             { "label": "Fox" },
             { "label": "Coyote" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find a plaque that mentions the word \"species\".",
+            "hintText": "Plaques near animals often talk about their species.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["species"]
+            }
+          }
         },
         {
           "type": "fill-blank",
           "ageTier": "10-15",
           "prompt": "The Mexican grey wolf on display is named _____.",
-          "answer": "Anna"
+          "answer": "Anna",
+          "scan": {
+            "prompt": "Find the wolf's name on a plaque.",
+            "hintText": "Plaques near the wolf exhibit should say her name.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Anna"]
+            }
+          }
         },
         {
           "type": "fill-blank",
           "ageTier": "15-20",
           "prompt": "What year was Anna, the species-reviving Mexican grey wolf, born?",
-          "answer": "2001"
+          "answer": "2001",
+          "scan": {
+            "prompt": "Find the year Anna was born on a plaque.",
+            "hintText": "Look for a four-digit year on the plaque near the wolf.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["2001"]
+            }
+          }
         }
       ]
     }

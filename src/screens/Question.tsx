@@ -1,6 +1,9 @@
-import { useMemo, useState } from "preact/hooks";
+import { useEffect, useMemo, useState } from "preact/hooks";
 import { sections, ageTier, go, awardPatch, markComplete } from "../state/game";
-import type { Question as Q, QuestionVariant } from "../content/types";
+import { mode } from "../state/router";
+import type { Question as Q, QuestionVariant, ScanBlock } from "../content/types";
+import { TextScanner } from "../components/TextScanner";
+import { ObjectScanner } from "../components/ObjectScanner";
 
 interface Props {
   sectionId: string;
@@ -24,6 +27,18 @@ export function Question({ sectionId, questionIndex }: Props) {
   const q = section?.questions[questionIndex];
   const variant = useMemo(() => (q ? pickVariant(q, tier) : undefined), [q, tier]);
 
+  const useScan = mode.value === "scan" && !!variant?.scan;
+  const scan: ScanBlock | undefined = variant?.scan;
+
+  // In scan mode, skip questions without a scan block.
+  useEffect(() => {
+    if (!section || !q || !variant) return;
+    if (mode.value === "scan" && !variant.scan) {
+      advance();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode.value, sectionId, questionIndex]);
+
   if (!section) return <main class="screen"><p>Section not found.</p></main>;
   if (!q || !variant) {
     return (
@@ -34,11 +49,23 @@ export function Question({ sectionId, questionIndex }: Props) {
     );
   }
 
-  function handleCorrect() {
+  function advance() {
     markComplete(section!.id, q!.id);
     const nextIdx = questionIndex + 1;
-    if (nextIdx < section!.questions.length) {
-      go({ kind: "question", sectionId: section!.id, questionIndex: nextIdx });
+    // When advancing in scan mode, keep skipping questions without a scan block.
+    const findNextPlayable = (idx: number): number => {
+      if (mode.value !== "scan") return idx;
+      let i = idx;
+      while (i < section!.questions.length) {
+        const nv = pickVariant(section!.questions[i]!, tier);
+        if (nv?.scan) return i;
+        i++;
+      }
+      return section!.questions.length;
+    };
+    const target = findNextPlayable(nextIdx);
+    if (target < section!.questions.length) {
+      go({ kind: "question", sectionId: section!.id, questionIndex: target });
     } else {
       awardPatch(section!.id);
       go({ kind: "patch-earned", sectionId: section!.id });
@@ -53,6 +80,31 @@ export function Question({ sectionId, questionIndex }: Props) {
     }
   }
 
+  if (useScan && scan) {
+    const v = scan.verification;
+    if (v.kind === "ocr") {
+      return (
+        <TextScanner
+          targets={v.anyOf}
+          prompt={scan.prompt}
+          hintText={scan.hintText}
+          onMatch={advance}
+          onCancel={() => go({ kind: "hint", sectionId, questionIndex })}
+        />
+      );
+    }
+    return (
+      <ObjectScanner
+        classes={v.classes}
+        prompt={scan.prompt}
+        hintText={scan.hintText}
+        minConfidence={scan.minConfidence}
+        onMatch={advance}
+        onCancel={() => go({ kind: "hint", sectionId, questionIndex })}
+      />
+    );
+  }
+
   return (
     <main class="screen">
       <div class="q-topic">{section.name}</div>
@@ -64,7 +116,7 @@ export function Question({ sectionId, questionIndex }: Props) {
             <button
               key={i}
               class="choice choice--image"
-              onClick={() => (c.correct ? handleCorrect() : handleWrong())}
+              onClick={() => (c.correct ? advance() : handleWrong())}
             >
               {c.image && <img src={c.image} alt={c.label} />}
               <span>{c.label}</span>
@@ -79,7 +131,7 @@ export function Question({ sectionId, questionIndex }: Props) {
             <button
               key={i}
               class="btn btn--big"
-              onClick={() => (c.correct ? handleCorrect() : handleWrong())}
+              onClick={() => (c.correct ? advance() : handleWrong())}
             >
               {c.label}
             </button>
@@ -94,7 +146,7 @@ export function Question({ sectionId, questionIndex }: Props) {
             e.preventDefault();
             const accepted = [variant.answer, ...(variant.acceptableAnswers ?? [])].map(normalize);
             if (accepted.includes(normalize(typed))) {
-              handleCorrect();
+              advance();
             } else {
               handleWrong();
             }

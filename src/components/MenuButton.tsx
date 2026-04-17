@@ -1,10 +1,14 @@
 import { useState } from "preact/hooks";
 import { go, resetAll, screen } from "../state/game";
+import { mode, setMode } from "../state/router";
 
 export function MenuButton() {
   const [open, setOpen] = useState(false);
   const hideOn = new Set(["welcome"]);
   if (hideOn.has(screen.value.kind)) return null;
+
+  const currentMode = mode.value;
+  const otherMode = currentMode === "scan" ? "classic" : "scan";
 
   return (
     <>
@@ -24,6 +28,14 @@ export function MenuButton() {
           </button>
           <button class="menu-item" onClick={() => { setOpen(false); go({ kind: "section-select" }); }}>
             Change Section
+          </button>
+          <button class="menu-item" onClick={() => {
+            setOpen(false);
+            setMode(otherMode);
+            go({ kind: "section-select" });
+          }}>
+            Switch to {otherMode} mode
+            <span class="menu-item__sub">currently: {currentMode}</span>
           </button>
           <button class="menu-item" onClick={() => { setOpen(false); resetAll(); }}>
             Restart
