@@ -1,0 +1,124 @@
+import { useMemo, useState } from "preact/hooks";
+import { sections, ageTier, go, awardPatch, markComplete } from "../state/game";
+import type { Question as Q, QuestionVariant } from "../content/types";
+
+interface Props {
+  sectionId: string;
+  questionIndex: number;
+}
+
+function pickVariant(q: Q, tier: string): QuestionVariant | undefined {
+  return q.variants.find((v) => v.ageTier === tier) ?? q.variants[0];
+}
+
+function normalize(s: string): string {
+  return s.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+export function Question({ sectionId, questionIndex }: Props) {
+  const section = sections.value.find((s) => s.id === sectionId);
+  const tier = ageTier.value ?? "5-10";
+  const [wrongAttempts, setWrongAttempts] = useState(0);
+  const [typed, setTyped] = useState("");
+
+  const q = section?.questions[questionIndex];
+  const variant = useMemo(() => (q ? pickVariant(q, tier) : undefined), [q, tier]);
+
+  if (!section) return <main class="screen"><p>Section not found.</p></main>;
+  if (!q || !variant) {
+    return (
+      <main class="screen">
+        <p>No questions available.</p>
+        <button class="btn" onClick={() => go({ kind: "section-select" })}>Back</button>
+      </main>
+    );
+  }
+
+  function handleCorrect() {
+    markComplete(section!.id, q!.id);
+    const nextIdx = questionIndex + 1;
+    if (nextIdx < section!.questions.length) {
+      go({ kind: "question", sectionId: section!.id, questionIndex: nextIdx });
+    } else {
+      awardPatch(section!.id);
+      go({ kind: "patch-earned", sectionId: section!.id });
+    }
+  }
+
+  function handleWrong() {
+    const next = wrongAttempts + 1;
+    setWrongAttempts(next);
+    if (next >= 1) {
+      go({ kind: "hint", sectionId, questionIndex });
+    }
+  }
+
+  return (
+    <main class="screen">
+      <div class="q-topic">{section.name}</div>
+      <h2 class="q-prompt">{variant.prompt}</h2>
+
+      {variant.type === "multi-image" && (
+        <div class="grid-2">
+          {variant.choices.map((c, i) => (
+            <button
+              key={i}
+              class="choice choice--image"
+              onClick={() => (c.correct ? handleCorrect() : handleWrong())}
+            >
+              {c.image && <img src={c.image} alt={c.label} />}
+              <span>{c.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {variant.type === "multi-text" && (
+        <div class="stack">
+          {variant.choices.map((c, i) => (
+            <button
+              key={i}
+              class="btn btn--big"
+              onClick={() => (c.correct ? handleCorrect() : handleWrong())}
+            >
+              {c.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {variant.type === "fill-blank" && (
+        <form
+          class="stack"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const accepted = [variant.answer, ...(variant.acceptableAnswers ?? [])].map(normalize);
+            if (accepted.includes(normalize(typed))) {
+              handleCorrect();
+            } else {
+              handleWrong();
+            }
+          }}
+        >
+          <input
+            class="fill-input"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck={false}
+            value={typed}
+            onInput={(e) => setTyped((e.currentTarget as HTMLInputElement).value)}
+            placeholder="Type your answer"
+          />
+          <button type="submit" class="btn btn--primary btn--big" disabled={typed.trim().length === 0}>
+            Submit
+          </button>
+        </form>
+      )}
+
+      {wrongAttempts > 0 && (
+        <p class="q-wrong">Not quite — try again.</p>
+      )}
+    </main>
+  );
+}
