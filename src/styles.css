@@ -142,7 +142,11 @@ h2 { font-size: 1.5rem; }
   background: var(--brand);
   color: #fff;
   border: none;
-  font-size: 1.4rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
   box-shadow: var(--shadow);
   cursor: pointer;
   z-index: 20;

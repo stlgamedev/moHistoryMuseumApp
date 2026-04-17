@@ -13,7 +13,9 @@ export function MenuButton() {
         aria-label="Open menu"
         onClick={() => setOpen((v) => !v)}
       >
-        ☰
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
       </button>
       {open && (
         <div class="menu-sheet" role="dialog" aria-label="Menu">
