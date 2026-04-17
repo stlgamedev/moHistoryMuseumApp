@@ -1,4 +1,11 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import {
+  classifyCameraError,
+  forceClassicThisSession,
+  noteCameraError,
+  type CameraErrorKind,
+} from "../state/capabilities";
+import { ScannerError } from "./ScannerError";
 
 interface Props {
   classes: string[];
@@ -7,6 +14,7 @@ interface Props {
   minConfidence?: number;
   onMatch: () => void;
   onCancel: () => void;
+  onFallbackToClassic: () => void;
 }
 
 type Status = "loading-camera" | "loading-model" | "scanning" | "matched" | "error";
@@ -42,11 +50,13 @@ export function ObjectScanner({
   minConfidence = 0.15,
   onMatch,
   onCancel,
+  onFallbackToClassic,
 }: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [status, setStatus] = useState<Status>("loading-camera");
   const [topGuess, setTopGuess] = useState<Prediction | null>(null);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorKind, setErrorKind] = useState<CameraErrorKind>("other");
+  const [retry, setRetry] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -106,7 +116,9 @@ export function ObjectScanner({
       } catch (err) {
         if (cancelled) return;
         console.error("ObjectScanner error", err);
-        setErrorMsg(err instanceof Error ? err.message : String(err));
+        const kind = classifyCameraError(err);
+        noteCameraError(kind);
+        setErrorKind(kind);
         setStatus("error");
       }
     })();
@@ -116,7 +128,24 @@ export function ObjectScanner({
       if (timer) window.clearInterval(timer);
       if (stream) stream.getTracks().forEach((t) => t.stop());
     };
-  }, [classes.join("|")]);
+  }, [classes.join("|"), retry]);
+
+  if (status === "error") {
+    return (
+      <ScannerError
+        kind={errorKind}
+        onUseClassic={() => {
+          forceClassicThisSession(errorKind);
+          onFallbackToClassic();
+        }}
+        onRetry={() => {
+          setStatus("loading-camera");
+          setRetry((n) => n + 1);
+        }}
+        onCancel={onCancel}
+      />
+    );
+  }
 
   const confidencePct = topGuess ? Math.round(topGuess.probability * 100) : 0;
 
@@ -134,9 +163,6 @@ export function ObjectScanner({
           )}
           {status === "scanning" && !topGuess && <p>Looking…</p>}
           {status === "matched" && <p class="scanner-matched">Found it!</p>}
-          {status === "error" && (
-            <p class="scanner-error">Camera unavailable: {errorMsg}</p>
-          )}
           {hintText && status === "scanning" && <p class="scanner-hint">Hint: {hintText}</p>}
         </div>
         <div class="scanner-actions">

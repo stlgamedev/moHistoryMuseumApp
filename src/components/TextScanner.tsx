@@ -1,4 +1,11 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import {
+  classifyCameraError,
+  forceClassicThisSession,
+  noteCameraError,
+  type CameraErrorKind,
+} from "../state/capabilities";
+import { ScannerError } from "./ScannerError";
 
 interface Props {
   targets: string[];
@@ -6,6 +13,7 @@ interface Props {
   hintText?: string;
   onMatch: () => void;
   onCancel: () => void;
+  onFallbackToClassic: () => void;
 }
 
 type Status = "loading-camera" | "loading-model" | "scanning" | "matched" | "error";
@@ -22,11 +30,19 @@ function containsAny(haystack: string, needles: string[]): string | null {
   return null;
 }
 
-export function TextScanner({ targets, prompt, hintText, onMatch, onCancel }: Props) {
+export function TextScanner({
+  targets,
+  prompt,
+  hintText,
+  onMatch,
+  onCancel,
+  onFallbackToClassic,
+}: Props) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [status, setStatus] = useState<Status>("loading-camera");
   const [lastText, setLastText] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errorKind, setErrorKind] = useState<CameraErrorKind>("other");
+  const [retry, setRetry] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
@@ -88,7 +104,9 @@ export function TextScanner({ targets, prompt, hintText, onMatch, onCancel }: Pr
       } catch (err) {
         if (cancelled) return;
         console.error("TextScanner error", err);
-        setErrorMsg(err instanceof Error ? err.message : String(err));
+        const kind = classifyCameraError(err);
+        noteCameraError(kind);
+        setErrorKind(kind);
         setStatus("error");
       }
     })();
@@ -99,7 +117,24 @@ export function TextScanner({ targets, prompt, hintText, onMatch, onCancel }: Pr
       if (worker) worker.terminate().catch(() => {});
       if (stream) stream.getTracks().forEach((t) => t.stop());
     };
-  }, [targets.join("|")]);
+  }, [targets.join("|"), retry]);
+
+  if (status === "error") {
+    return (
+      <ScannerError
+        kind={errorKind}
+        onUseClassic={() => {
+          forceClassicThisSession(errorKind);
+          onFallbackToClassic();
+        }}
+        onRetry={() => {
+          setStatus("loading-camera");
+          setRetry((n) => n + 1);
+        }}
+        onCancel={onCancel}
+      />
+    );
+  }
 
   return (
     <div class="scanner">
@@ -112,9 +147,6 @@ export function TextScanner({ targets, prompt, hintText, onMatch, onCancel }: Pr
           {status === "loading-model" && <p>Loading text reader…</p>}
           {status === "scanning" && <p>Scanning for text… {lastText && <em>Sees: "{lastText}"</em>}</p>}
           {status === "matched" && <p class="scanner-matched">Found it!</p>}
-          {status === "error" && (
-            <p class="scanner-error">Camera unavailable: {errorMsg}</p>
-          )}
           {hintText && status === "scanning" && <p class="scanner-hint">Hint: {hintText}</p>}
         </div>
         <div class="scanner-actions">

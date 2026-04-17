@@ -3,6 +3,7 @@ import { screen, sections } from "./state/game";
 import { loadSectionIndex, loadSection } from "./content/loader";
 import { loadConfig } from "./state/config";
 import { initRouter } from "./state/router";
+import { probeCameraCapability } from "./state/capabilities";
 import { MenuButton } from "./components/MenuButton";
 import { Welcome } from "./screens/Welcome";
 import { About } from "./screens/About";
@@ -20,6 +21,7 @@ export function App() {
     (async () => {
       await loadConfig();
       initRouter();
+      probeCameraCapability();
       try {
         const index = await loadSectionIndex();
         const loaded = await Promise.all(

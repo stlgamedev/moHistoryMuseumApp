@@ -439,3 +439,46 @@ h2 { font-size: 1.5rem; }
   background: rgba(255, 255, 255, 0.92);
   color: var(--fg);
 }
+
+.scanner-error-panel {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.scanner-error-card {
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: var(--radius);
+  max-width: 440px;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+.scanner-error-card h2 {
+  margin: 0;
+}
+
+.scanner-error-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.notice {
+  background: rgba(230, 180, 91, 0.18);
+  border: 1px solid rgba(230, 180, 91, 0.55);
+  color: var(--fg);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}

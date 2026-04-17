@@ -1,7 +1,18 @@
 import { go, sections, earnedPatches, ageTier } from "../state/game";
+import { mode } from "../state/router";
+import { capabilities } from "../state/capabilities";
 
 export function SectionSelect() {
   const list = sections.value;
+  const caps = capabilities.value;
+  const scanRequestedButBlocked =
+    mode.value === "scan" && (!caps.cameraApiAvailable || caps.cameraKnownBad);
+  const reason =
+    !caps.cameraApiAvailable
+      ? "Your device doesn't support camera mode — we'll use the classic questions instead."
+      : caps.lastError === "permission-denied"
+        ? "Camera access was blocked. We'll use the classic questions; reload the page to try camera mode again."
+        : "Camera wasn't available. We'll use the classic questions for now.";
 
   if (!ageTier.value) {
     return (
@@ -14,6 +25,9 @@ export function SectionSelect() {
 
   return (
     <main class="screen">
+      {scanRequestedButBlocked && (
+        <div class="notice" role="status">{reason}</div>
+      )}
       <h2>Pick a section</h2>
       {list.length === 0 ? (
         <p>Loading sections…</p>

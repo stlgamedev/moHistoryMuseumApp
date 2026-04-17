@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "preact/hooks";
 import { sections, ageTier, go, awardPatch, markComplete } from "../state/game";
 import { mode } from "../state/router";
+import { capabilities } from "../state/capabilities";
 import type { Question as Q, QuestionVariant, ScanBlock } from "../content/types";
 import { TextScanner } from "../components/TextScanner";
 import { ObjectScanner } from "../components/ObjectScanner";
@@ -27,7 +28,9 @@ export function Question({ sectionId, questionIndex }: Props) {
   const q = section?.questions[questionIndex];
   const variant = useMemo(() => (q ? pickVariant(q, tier) : undefined), [q, tier]);
 
-  const useScan = mode.value === "scan" && !!variant?.scan;
+  const caps = capabilities.value;
+  const scanBlocked = !caps.cameraApiAvailable || caps.cameraKnownBad;
+  const useScan = mode.value === "scan" && !!variant?.scan && !scanBlocked;
   const scan: ScanBlock | undefined = variant?.scan;
 
   // In scan mode, skip questions without a scan block.
@@ -82,6 +85,9 @@ export function Question({ sectionId, questionIndex }: Props) {
 
   if (useScan && scan) {
     const v = scan.verification;
+    // onFallbackToClassic: the capabilities signal is already flipped inside the scanner;
+    // nothing else to do — this component re-renders and falls into the classic branch below.
+    const noopFallback = () => { /* capabilities signal change triggers re-render */ };
     if (v.kind === "ocr") {
       return (
         <TextScanner
@@ -90,6 +96,7 @@ export function Question({ sectionId, questionIndex }: Props) {
           hintText={scan.hintText}
           onMatch={advance}
           onCancel={() => go({ kind: "hint", sectionId, questionIndex })}
+          onFallbackToClassic={noopFallback}
         />
       );
     }
@@ -101,6 +108,7 @@ export function Question({ sectionId, questionIndex }: Props) {
         minConfidence={scan.minConfidence}
         onMatch={advance}
         onCancel={() => go({ kind: "hint", sectionId, questionIndex })}
+        onFallbackToClassic={noopFallback}
       />
     );
   }
