@@ -19,7 +19,15 @@
             { "label": "Parlor Queen", "correct": true },
             { "label": "Floor Buddy" },
             { "label": "Sweeping Sally" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find a sign with the words \"Parlor Queen\".",
+            "hintText": "Look for a sign or plaque next to the sweeper.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["parlor queen", "Parlor Queen"]
+            }
+          }
         },
         {
           "type": "multi-text",
