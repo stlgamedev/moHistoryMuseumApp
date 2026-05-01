@@ -13,7 +13,7 @@
       "variants": [
         {
           "type": "multi-image",
-          "ageTier": "3-5",
+          "ageTier": "youth",
           "prompt": "The famous Mexican grey wolf is named what?",
           "choices": [
             { "label": "Anna", "image": "images/choice-anna.svg", "correct": true },
@@ -31,7 +31,7 @@
         },
         {
           "type": "multi-text",
-          "ageTier": "5-10",
+          "ageTier": "teen",
           "prompt": "What kind of animal is Anna, who helped revive her species?",
           "choices": [
             { "label": "Wolf", "correct": true },
@@ -49,21 +49,7 @@
         },
         {
           "type": "fill-blank",
-          "ageTier": "10-15",
-          "prompt": "The Mexican grey wolf on display is named _____.",
-          "answer": "Anna",
-          "scan": {
-            "prompt": "Find the wolf's name on a plaque.",
-            "hintText": "Plaques near the wolf exhibit should say her name.",
-            "verification": {
-              "kind": "ocr",
-              "anyOf": ["Anna"]
-            }
-          }
-        },
-        {
-          "type": "fill-blank",
-          "ageTier": "15+",
+          "ageTier": "adult",
           "prompt": "What year was Anna, the species-reviving Mexican grey wolf, born?",
           "answer": "2001",
           "scan": {

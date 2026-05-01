@@ -55,10 +55,9 @@ export function setAge(years: number): void {
 }
 
 function tierFor(years: number): AgeTier {
-  if (years <= 5) return "3-5";
-  if (years <= 10) return "5-10";
-  if (years <= 15) return "10-15";
-  return "15+";
+  if (years <= 12) return "youth";
+  if (years <= 17) return "teen";
+  return "adult";
 }
 
 export function selectAgeTier(tier: AgeTier): void {

@@ -21,7 +21,7 @@ function normalize(s: string): string {
 
 export function Question({ sectionId, questionIndex }: Props) {
   const section = sections.value.find((s) => s.id === sectionId);
-  const tier = ageTier.value ?? "5-10";
+  const tier = ageTier.value ?? "youth";
   const [wrongAttempts, setWrongAttempts] = useState(0);
   const [typed, setTyped] = useState("");
 

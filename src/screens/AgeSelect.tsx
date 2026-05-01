@@ -1,10 +1,10 @@
 import { go, selectAgeTier } from "../state/game";
-import { AGE_TIERS } from "../content/types";
+import { AGE_TIERS, AGE_TIER_LABELS } from "../content/types";
 
 export function AgeSelect() {
   return (
     <main class="screen">
-      <h2>What age are you?</h2>
+      <h2>Who's playing?</h2>
       <div class="grid-2">
         {AGE_TIERS.map((tier) => (
           <button
@@ -15,7 +15,7 @@ export function AgeSelect() {
               go({ kind: "section-select" });
             }}
           >
-            {tier}
+            {AGE_TIER_LABELS[tier]}
           </button>
         ))}
       </div>

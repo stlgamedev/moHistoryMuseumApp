@@ -1,6 +1,12 @@
-export type AgeTier = "3-5" | "5-10" | "10-15" | "15+";
+export type AgeTier = "youth" | "teen" | "adult";
 
-export const AGE_TIERS: AgeTier[] = ["3-5", "5-10", "10-15", "15+"];
+export const AGE_TIERS: AgeTier[] = ["youth", "teen", "adult"];
+
+export const AGE_TIER_LABELS: Record<AgeTier, string> = {
+  youth: "Youth",
+  teen: "Teen",
+  adult: "Adult",
+};
 
 export interface AgeRange {
   min: number;
@@ -8,10 +14,9 @@ export interface AgeRange {
 }
 
 export const AGE_TIER_RANGES: Record<AgeTier, AgeRange> = {
-  "3-5": { min: 3, max: 5 },
-  "5-10": { min: 5, max: 10 },
-  "10-15": { min: 10, max: 15 },
-  "15+": { min: 15, max: 200 },
+  youth: { min: 3, max: 12 },
+  teen: { min: 13, max: 17 },
+  adult: { min: 18, max: 200 },
 };
 
 export interface MultiChoiceOption {
