@@ -73,11 +73,24 @@ def caption(doc, text):
     r.font.color.rgb = GREY
 
 
+def warning_banner(doc, text):
+    t = doc.add_table(rows=1, cols=1)
+    t.autofit = False
+    cell = t.rows[0].cells[0]
+    p = cell.paragraphs[0]
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    r = p.add_run(text)
+    r.bold = True
+    r.font.size = Pt(11)
+    r.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+    set_cell_bg(cell, "C0392B")
+
+
 def legend(doc):
     p = doc.add_paragraph()
     r = p.add_run(
-        "Format A = pick a picture (3 choices, mark correct with ✅)   ·   "
-        "Format B = pick a word (3 choices, mark correct with ✅)   ·   "
+        "Format A = pick a picture (3 choices, mark correct with *)   ·   "
+        "Format B = pick a word (3 choices, mark correct with *)   ·   "
         "Format C = type the answer"
     )
     r.italic = True
@@ -90,7 +103,7 @@ def legend(doc):
 def fmt_choices(choices, with_images):
     out = []
     for c in choices:
-        mark = " ✅" if c.get("correct") else ""
+        mark = " *" if c.get("correct") else ""
         if with_images and c.get("image"):
             out.append(f"{c['label']}{mark} (image: {c['image']})")
         else:
@@ -122,8 +135,10 @@ def fmt_variant(variant):
 
 
 def example_page(doc, section, question):
+    warning_banner(doc, "EXAMPLE — DO NOT FILL OUT.  Use page 2 (Question Worksheet) for new questions.")
+    doc.add_paragraph()
     title(doc, "Example", size=18)
-    caption(doc, "Here's how a finished question looks. The next page is a blank you can print and fill in.")
+    caption(doc, "Here's how a finished question looks. The next page is the blank to print and fill in.")
     doc.add_paragraph()
 
     t = two_col_table(doc)
@@ -149,21 +164,26 @@ def example_page(doc, section, question):
 
 # ---------- blank page ----------
 
-def blank_page(doc):
+def blank_page(doc, section_names):
     title(doc, "Question Worksheet", size=18)
     caption(doc, "Print as many copies as you need — one per question.")
-    doc.add_paragraph()
+
+    p = doc.add_paragraph()
+    r = p.add_run(f"Sections to choose from: {', '.join(section_names)}.")
+    r.italic = True
+    r.font.size = Pt(9)
+    r.font.color.rgb = GREY
 
     t = two_col_table(doc)
-    kv_row(t, "Section", "")
-    kv_row(t, "Topic", "")
-    kv_row(t, "Hint", "")
-    kv_row(t, "Hint image", "")
+    kv_row(t, "Section")
+    kv_row(t, "Topic")
+    kv_row(t, "Hint")
+    kv_row(t, "Hint image")
     for tier in TIERS:
-        kv_row(t, TIER_LABELS[tier], "")
-        kv_row(t, "  Format (A/B/C)", "")
-        kv_row(t, "  Choices / answer", "")
-        kv_row(t, "  Camera (optional)", "")
+        kv_row(t, TIER_LABELS[tier])
+        kv_row(t, "  Format (A/B/C)")
+        kv_row(t, "  Choices / answer")
+        kv_row(t, "  Camera (optional)")
 
     doc.add_paragraph()
     legend(doc)
@@ -173,7 +193,9 @@ def blank_page(doc):
 
 def main():
     index = json.loads(INDEX_PATH.read_text())
-    first_section = json.loads((CONTENT / index["sections"][0]["path"]).read_text())
+    sections_data = [json.loads((CONTENT / s["path"]).read_text()) for s in index["sections"]]
+    section_names = [s["name"] for s in sections_data]
+    first_section = sections_data[0]
     first_question = first_section["questions"][0]
 
     doc = Document()
@@ -182,7 +204,7 @@ def main():
 
     example_page(doc, first_section, first_question)
     doc.add_page_break()
-    blank_page(doc)
+    blank_page(doc, section_names)
 
     doc.save(OUT)
     print(f"Wrote {OUT}")

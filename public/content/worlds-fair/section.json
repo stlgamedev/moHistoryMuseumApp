@@ -1,0 +1,60 @@
+{
+  "id": "worlds-fair",
+  "name": "World's Fair",
+  "patchName": "World's Fair Patch",
+  "patchImage": "patch.svg",
+  "description": "Wonders showcased at the 1904 World's Fair.",
+  "questions": [
+    {
+      "id": "parlor-queen",
+      "topic": "Parlor Queen",
+      "hintImage": "images/parlor-queen.png",
+      "hintText": "Look for the long broom-like object in the World's Fair hall.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "What was the name of the floor sweeping invention showcased at the fair?",
+          "choices": [
+            { "label": "Parlor Queen", "correct": true },
+            { "label": "Floor Buddy" },
+            { "label": "Sweeping Sally" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "What is the Parlor Queen used for?",
+          "choices": [
+            { "label": "Sweeping floors", "correct": true },
+            { "label": "Organizing pantries" },
+            { "label": "Washing dishes" }
+          ],
+          "scan": {
+            "prompt": "Find a plaque that mentions the words \"parlor queen\".",
+            "hintText": "Plaques near the sweeper should name it.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["parlor queen", "Parlor Queen"]
+            }
+          }
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "What company created the Parlor Queen?",
+          "answer": "Bissell",
+          "acceptableAnswers": ["The Bissell Company", "Bissell Company", "Bissell's"],
+          "scan": {
+            "prompt": "Find the company that created the Parlor Queen on a plaque.",
+            "hintText": "Look for the maker's name on a plaque near the sweeper.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Bissell"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

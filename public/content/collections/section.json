@@ -12,13 +12,13 @@
       "hintText": "Look for the wolf display in the Collections gallery.",
       "variants": [
         {
-          "type": "multi-image",
+          "type": "multi-text",
           "ageTier": "youth",
           "prompt": "The famous Mexican grey wolf is named what?",
           "choices": [
-            { "label": "Anna", "image": "images/choice-anna.svg", "correct": true },
-            { "label": "Jack", "image": "images/choice-jack.svg" },
-            { "label": "Beverly", "image": "images/choice-beverly.svg" }
+            { "label": "Anna", "correct": true },
+            { "label": "Jack" },
+            { "label": "Beverly" }
           ],
           "scan": {
             "prompt": "Find a wolf somewhere in the museum!",

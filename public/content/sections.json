@@ -1,5 +1,6 @@
 {
   "sections": [
-    { "id": "collections", "path": "collections/section.json" }
+    { "id": "collections", "path": "collections/section.json" },
+    { "id": "worlds-fair", "path": "worlds-fair/section.json" }
   ]
 }
