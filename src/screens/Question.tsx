@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "preact/hooks";
+import { useMemo, useState } from "preact/hooks";
 import { sections, ageTier, go, awardPatch, markComplete } from "../state/game";
 import { mode } from "../state/router";
 import { capabilities } from "../state/capabilities";
@@ -33,25 +33,6 @@ export function Question({ sectionId, questionIndex }: Props) {
   const useScan = mode.value === "scan" && !!variant?.scan && !scanBlocked;
   const scan: ScanBlock | undefined = variant?.scan;
 
-  // In scan mode, skip past questions without a scan block — but don't
-  // mark them complete and don't trigger patch awards. Only legitimate
-  // answers (via `advance`) should count toward section completion.
-  useEffect(() => {
-    if (!section || !q || !variant) return;
-    if (mode.value !== "scan" || variant.scan) return;
-    let i = questionIndex + 1;
-    while (i < section.questions.length) {
-      const nv = pickVariant(section.questions[i]!, tier);
-      if (nv?.scan) {
-        go({ kind: "question", sectionId: section.id, questionIndex: i });
-        return;
-      }
-      i++;
-    }
-    go({ kind: "section-select" });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mode.value, sectionId, questionIndex]);
-
   if (!section) return <main class="screen"><p>Section not found.</p></main>;
   if (!q || !variant) {
     return (
@@ -65,20 +46,8 @@ export function Question({ sectionId, questionIndex }: Props) {
   function advance() {
     markComplete(section!.id, q!.id);
     const nextIdx = questionIndex + 1;
-    // When advancing in scan mode, keep skipping questions without a scan block.
-    const findNextPlayable = (idx: number): number => {
-      if (mode.value !== "scan") return idx;
-      let i = idx;
-      while (i < section!.questions.length) {
-        const nv = pickVariant(section!.questions[i]!, tier);
-        if (nv?.scan) return i;
-        i++;
-      }
-      return section!.questions.length;
-    };
-    const target = findNextPlayable(nextIdx);
-    if (target < section!.questions.length) {
-      go({ kind: "question", sectionId: section!.id, questionIndex: target });
+    if (nextIdx < section!.questions.length) {
+      go({ kind: "question", sectionId: section!.id, questionIndex: nextIdx });
     } else {
       awardPatch(section!.id);
       go({ kind: "patch-earned", sectionId: section!.id });
