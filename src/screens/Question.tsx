@@ -33,12 +33,22 @@ export function Question({ sectionId, questionIndex }: Props) {
   const useScan = mode.value === "scan" && !!variant?.scan && !scanBlocked;
   const scan: ScanBlock | undefined = variant?.scan;
 
-  // In scan mode, skip questions without a scan block.
+  // In scan mode, skip past questions without a scan block — but don't
+  // mark them complete and don't trigger patch awards. Only legitimate
+  // answers (via `advance`) should count toward section completion.
   useEffect(() => {
     if (!section || !q || !variant) return;
-    if (mode.value === "scan" && !variant.scan) {
-      advance();
+    if (mode.value !== "scan" || variant.scan) return;
+    let i = questionIndex + 1;
+    while (i < section.questions.length) {
+      const nv = pickVariant(section.questions[i]!, tier);
+      if (nv?.scan) {
+        go({ kind: "question", sectionId: section.id, questionIndex: i });
+        return;
+      }
+      i++;
     }
+    go({ kind: "section-select" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode.value, sectionId, questionIndex]);
 
