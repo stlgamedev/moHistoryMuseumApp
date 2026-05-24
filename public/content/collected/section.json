@@ -1,0 +1,116 @@
+{
+  "id": "collected",
+  "name": "Collected",
+  "patchName": "Collected Patch",
+  "patchImage": "patch.svg",
+  "description": "Stories behind objects in the Collected gallery.",
+  "questions": [
+    {
+      "id": "iron-lung",
+      "topic": "The Iron Lung",
+      "hintText": "Look for the yellow iron lung in the Collected gallery.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "School teacher Eleanor Abbott invented a game for children to play while they were hospitalized with polio. What was the name of the game?",
+          "choices": [
+            { "label": "Candyland", "correct": true },
+            { "label": "Operation" },
+            { "label": "Chutes and Ladders" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "How did the iron lung help patients with polio?",
+          "choices": [
+            { "label": "Regulate their heartbeat" },
+            { "label": "Help them breathe", "correct": true },
+            { "label": "Rebuild their muscle" }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "What year was the polio vaccine made available to the public?",
+          "answer": "1952"
+        }
+      ]
+    },
+    {
+      "id": "greenland-inuit-sledge",
+      "topic": "Greenland Inuit Sledge",
+      "hintText": "Look for the wooden sledge in the Collected gallery.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "What animal pulled the sledge?",
+          "choices": [
+            { "label": "Dogs", "correct": true },
+            { "label": "Penguins" },
+            { "label": "Horses" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "How long did it take Robert Peary and his crew to travel from New York City to the North Pole?",
+          "choices": [
+            { "label": "3 months" },
+            { "label": "6 months" },
+            { "label": "9 months", "correct": true }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "Robert Peary's polar expedition was sponsored by what local supply company?",
+          "answer": "Simmons Hardware",
+          "acceptableAnswers": ["Simmons", "Simmons Hardware Company"]
+        }
+      ]
+    },
+    {
+      "id": "intaglio-printing-press",
+      "topic": "Intaglio Printing Press",
+      "hintText": "Look for the large spokes of the printing press in the Collected gallery.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "What is this big old machine used for?",
+          "choices": [
+            { "label": "Printing", "correct": true },
+            { "label": "Washing clothes" },
+            { "label": "Grinding flour" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "This printing press is named after the intaglio printing process. What does \"intaglio\" mean in Italian?",
+          "choices": [
+            { "label": "Copy" },
+            { "label": "Engraving", "correct": true },
+            { "label": "Imprint" }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "The intaglio process is still used today to print what?",
+          "answer": "Paper money and passports",
+          "acceptableAnswers": [
+            "paper money",
+            "money and passports",
+            "passports and paper money",
+            "passports",
+            "currency and passports"
+          ]
+        }
+      ]
+    }
+  ]
+}

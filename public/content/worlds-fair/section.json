@@ -55,6 +55,133 @@
           }
         }
       ]
+    },
+    {
+      "id": "buildings",
+      "topic": "Buildings",
+      "hintText": "Look for the lion's head.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "How many buildings were at the World's Fair?",
+          "choices": [
+            { "label": "800" },
+            { "label": "500", "correct": true },
+            { "label": "300" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "What material were the buildings made of?",
+          "choices": [
+            { "label": "Staff", "correct": true },
+            { "label": "Concrete" },
+            { "label": "Wood" }
+          ],
+          "scan": {
+            "prompt": "Find the word \"material\" on a plaque.",
+            "hintText": "Plaques near the buildings exhibit talk about materials.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["material", "Material"]
+            }
+          }
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "What are the three components of Staff, which is what the majority of the buildings were made of?",
+          "answer": "Cement, hemp fiber, water",
+          "acceptableAnswers": [
+            "cement hemp fiber water",
+            "cement, hemp, water",
+            "cement hemp water",
+            "water cement hemp fiber",
+            "hemp fiber cement water"
+          ],
+          "scan": {
+            "prompt": "Find the components for Staff on a plaque.",
+            "hintText": "Look for a plaque listing cement, hemp fiber, and water.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Cement", "Hemp", "Hemp fiber"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "legacies",
+      "topic": "Legacies of the fair",
+      "hintText": "Look for a movie playing — there's a picture of Judy Garland nearby.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "What is the one building from the World's Fair that we can still see today?",
+          "choices": [
+            { "label": "The Missouri History Museum" },
+            { "label": "The Art Museum", "correct": true },
+            { "label": "The Missouri State Building" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "What movie was inspired by the 1904 World's Fair?",
+          "choices": [
+            { "label": "Carousel" },
+            { "label": "The Wizard of Oz" },
+            { "label": "Meet Me in St. Louis", "correct": true }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "What was the name of Young Spartan painter's great-grandfather who was a waiter and guide at the fair?",
+          "answer": "Ramon Ochoa",
+          "acceptableAnswers": ["Ochoa", "Ramón Ochoa"]
+        }
+      ]
+    },
+    {
+      "id": "going-to-the-fair",
+      "topic": "Going to the fair",
+      "hintText": "Look for an interesting way to get around — like the push chair.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "Name an animal that people might see for the first time at the fair.",
+          "choices": [
+            { "label": "Camel", "correct": true },
+            { "label": "Dog" },
+            { "label": "Bird" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "How many states were present at the World's Fair?",
+          "choices": [
+            { "label": "50" },
+            { "label": "45" },
+            { "label": "43", "correct": true }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "adult",
+          "prompt": "What was marathon runner T.J. Hicks given during the marathon?",
+          "choices": [
+            { "label": "A mixture of brandy, strychnine, and egg whites", "correct": true },
+            { "label": "A flask of warm cola and raw honey" },
+            { "label": "Cold beef broth with a shot of whiskey" }
+          ]
+        }
+      ]
     }
   ]
 }

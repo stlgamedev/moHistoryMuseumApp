@@ -1,0 +1,50 @@
+{
+  "id": "marvel-in-motion",
+  "name": "Marvel in Motion",
+  "patchName": "Marvel in Motion Patch",
+  "patchImage": "patch.svg",
+  "description": "Inventions and rides that put the world in motion.",
+  "questions": [
+    {
+      "id": "ferris-wheel",
+      "topic": "The 1904 World's Fair Ferris Wheel",
+      "hintText": "Look for the Ferris wheel display.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "The cars on the Ferris wheel were as big as a...",
+          "choices": [
+            { "label": "School bus", "correct": true },
+            { "label": "Airplane" },
+            { "label": "Swimming pool" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "What is the name of the man who invented the Ferris wheel?",
+          "choices": [
+            { "label": "John Jacob Ferris" },
+            { "label": "George Washington Ferris", "correct": true },
+            { "label": "Cooper Collin Ferris" }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "What year did the Ferris wheel make its debut?",
+          "answer": "1893",
+          "scan": {
+            "prompt": "Find 1893 in the exhibit.",
+            "hintText": "Look for the four-digit year on a plaque or label.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["1893"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

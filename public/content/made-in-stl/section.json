@@ -1,0 +1,77 @@
+{
+  "id": "made-in-stl",
+  "name": "Made in St. Louis",
+  "patchName": "Made in St. Louis Patch",
+  "patchImage": "patch.svg",
+  "description": "Inventions and brands born in St. Louis.",
+  "questions": [
+    {
+      "id": "reddi-wip",
+      "topic": "Reddi-Wip",
+      "hintText": "Take a look inside the refrigerator in the Made in St. Louis gallery.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "What fizzy lemon soda was invented in St. Louis?",
+          "choices": [
+            { "label": "Sprite" },
+            { "label": "Starry" },
+            { "label": "7Up", "correct": true }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "Which of these was named by TIME magazine as one of the 20th century's \"100 Greatest Things for Consumers\"?",
+          "choices": [
+            { "label": "Reddi-Wip", "correct": true },
+            { "label": "Ice cream cones" },
+            { "label": "7Up" }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "What was the name of the drink mix that eventually became Pixy Stix?",
+          "answer": "Fruzola",
+          "acceptableAnswers": ["Frutzola"]
+        }
+      ]
+    },
+    {
+      "id": "build-a-bear",
+      "topic": "Build-A-Bear",
+      "hintText": "Look in the Made in St. Louis gallery.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "What is the name of the Build-A-Bear teddy bear in the display case?",
+          "choices": [
+            { "label": "Bearemy", "correct": true },
+            { "label": "Fluffy McFlufferson" },
+            { "label": "Louie" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "Where did Maxine Clark open the first Build-A-Bear store in 1997?",
+          "choices": [
+            { "label": "Downtown Kirkwood" },
+            { "label": "Busch Stadium" },
+            { "label": "The St. Louis Galleria", "correct": true }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "How many Build-A-Bear stores operate around the world today?",
+          "answer": "500",
+          "acceptableAnswers": ["500 stores", "around 500", "about 500"]
+        }
+      ]
+    }
+  ]
+}

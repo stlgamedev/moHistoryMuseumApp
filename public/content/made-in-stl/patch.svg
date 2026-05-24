@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Made in St. Louis patch">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ffd9d6"/>
+      <stop offset="100%" stop-color="#b73a2a"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="100" r="92" fill="url(#g)" stroke="#5a1812" stroke-width="6"/>
+  <circle cx="100" cy="100" r="72" fill="none" stroke="#5a1812" stroke-width="3" stroke-dasharray="4 6"/>
+  <text x="100" y="92" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#2c0a07">MADE IN</text>
+  <text x="100" y="118" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#2c0a07">ST. LOUIS</text>
+</svg>
