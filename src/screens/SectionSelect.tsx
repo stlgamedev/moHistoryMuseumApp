@@ -1,6 +1,7 @@
 import { go, sections, restoredSections, ageTier } from "../state/game";
 import { mode } from "../state/router";
 import { capabilities } from "../state/capabilities";
+import { RestorableFlag } from "../components/RestorableFlag";
 
 export function SectionSelect() {
   const list = sections.value;
@@ -28,21 +29,22 @@ export function SectionSelect() {
       {scanRequestedButBlocked && (
         <div class="notice" role="status">{reason}</div>
       )}
+      <RestorableFlag restored={restoredSections.value} class="flag--sm" />
       <h2>Pick a section</h2>
       {list.length === 0 ? (
         <p>Loading sections…</p>
       ) : (
         <div class="stack">
           {list.map((sec) => {
-            const earned = restoredSections.value.has(sec.id);
+            const done = restoredSections.value.has(sec.id);
             return (
               <button
                 key={sec.id}
-                class="btn btn--tile btn--big"
+                class="btn btn--primary btn--big btn--tile"
                 onClick={() => go({ kind: "question", sectionId: sec.id, questionIndex: 0 })}
               >
                 <span>{sec.name}</span>
-                {earned && <span class="badge">★ Patch earned</span>}
+                {done && <span class="badge-done">★ Restored</span>}
               </button>
             );
           })}

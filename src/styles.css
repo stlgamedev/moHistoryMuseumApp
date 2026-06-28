@@ -600,3 +600,10 @@ h2 { font-size: 1.5rem; }
   width: min(70vw, 280px);
   height: auto;
 }
+
+.badge-done {
+  font-size: 0.8rem;
+  color: var(--headline);
+  opacity: 0.85;
+  font-weight: 600;
+}
