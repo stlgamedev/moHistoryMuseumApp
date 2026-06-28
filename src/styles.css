@@ -141,7 +141,7 @@ h2 { font-size: 1.5rem; }
   position: relative;
   display: grid;
   place-items: center;
-  width: min(78vw, 320px);
+  width: min(88vw, 380px);
   aspect-ratio: 1;
   margin: 0 auto;
 }
@@ -157,15 +157,43 @@ h2 { font-size: 1.5rem; }
 .badge__text {
   position: relative;
   z-index: 1;
-  width: 64%;
+  /* Constrained to the shape's rounded interior (the valley circle) so long
+     copy clears the points. */
+  width: 56%;
   text-align: center;
   color: var(--headline);
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.4rem;
-  line-height: 1.15;
+  font-size: clamp(0.95rem, 4.2vw, 1.25rem);
+  line-height: 1.18;
   text-transform: uppercase;
   letter-spacing: 0.01em;
+  overflow-wrap: break-word;
+}
+
+/* Short, punchy confirmation (e.g. "Correct!") — larger text, more room. */
+.badge--correct .badge__text {
+  width: 64%;
+  font-size: clamp(1.5rem, 8vw, 2.4rem);
+}
+
+/* Full-screen "Correct!" celebration shown briefly after a right answer.
+   Also blocks taps on the question underneath during the flash. */
+.correct-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(161, 161, 206, 0.82);
+  backdrop-filter: blur(2px);
+  animation: correct-pop 200ms ease-out;
+}
+
+@keyframes correct-pop {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 .menu-fab {

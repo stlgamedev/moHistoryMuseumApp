@@ -5,6 +5,7 @@ import { capabilities } from "../state/capabilities";
 import type { Question as Q, QuestionVariant, ScanBlock } from "../content/types";
 import { TextScanner } from "../components/TextScanner";
 import { ObjectScanner } from "../components/ObjectScanner";
+import { StarburstBadge } from "../components/StarburstBadge";
 
 interface Props {
   sectionId: string;
@@ -24,6 +25,7 @@ export function Question({ sectionId, questionIndex }: Props) {
   const tier = ageTier.value ?? "youth";
   const [wrongAttempts, setWrongAttempts] = useState(0);
   const [typed, setTyped] = useState("");
+  const [correct, setCorrect] = useState(false);
 
   const q = section?.questions[questionIndex];
   const variant = useMemo(() => (q ? pickVariant(q, tier) : undefined), [q, tier]);
@@ -52,6 +54,13 @@ export function Question({ sectionId, questionIndex }: Props) {
       restoreSection(section!.id);
       go({ kind: "section-restored", sectionId: section!.id });
     }
+  }
+
+  // Flash a "Correct!" starburst, then advance. The full-screen overlay also
+  // blocks further taps during the celebration.
+  function handleCorrect() {
+    setCorrect(true);
+    window.setTimeout(advance, 1100);
   }
 
   function handleWrong() {
@@ -103,7 +112,7 @@ export function Question({ sectionId, questionIndex }: Props) {
             <button
               key={i}
               class="choice choice--image"
-              onClick={() => (c.correct ? advance() : handleWrong())}
+              onClick={() => (c.correct ? handleCorrect() : handleWrong())}
             >
               {c.image && <img src={c.image} alt={c.label} />}
               <span>{c.label}</span>
@@ -118,7 +127,7 @@ export function Question({ sectionId, questionIndex }: Props) {
             <button
               key={i}
               class="btn btn--big"
-              onClick={() => (c.correct ? advance() : handleWrong())}
+              onClick={() => (c.correct ? handleCorrect() : handleWrong())}
             >
               {c.label}
             </button>
@@ -133,7 +142,7 @@ export function Question({ sectionId, questionIndex }: Props) {
             e.preventDefault();
             const accepted = [variant.answer, ...(variant.acceptableAnswers ?? [])].map(normalize);
             if (accepted.includes(normalize(typed))) {
-              advance();
+              handleCorrect();
             } else {
               handleWrong();
             }
@@ -157,6 +166,12 @@ export function Question({ sectionId, questionIndex }: Props) {
 
       {wrongAttempts > 0 && (
         <p class="q-wrong">Not quite — try again.</p>
+      )}
+
+      {correct && (
+        <div class="correct-overlay" role="status" aria-live="polite">
+          <StarburstBadge class="badge--correct">Correct!</StarburstBadge>
+        </div>
       )}
     </main>
   );

@@ -45,7 +45,7 @@ export function App() {
       {s.kind === "instructions" && <Instructions />}
       {s.kind === "age-select" && <AgeSelect />}
       {s.kind === "section-select" && <SectionSelect />}
-      {s.kind === "question" && <Question sectionId={s.sectionId} questionIndex={s.questionIndex} />}
+      {s.kind === "question" && <Question key={`${s.sectionId}:${s.questionIndex}`} sectionId={s.sectionId} questionIndex={s.questionIndex} />}
       {s.kind === "hint" && <Hint sectionId={s.sectionId} questionIndex={s.questionIndex} />}
       {s.kind === "section-restored" && <SectionRestored sectionId={s.sectionId} />}
       {s.kind === "flag" && <Flag />}
