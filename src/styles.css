@@ -547,3 +547,34 @@ h2 { font-size: 1.5rem; }
 .flag--sm {
   width: min(60vw, 220px);
 }
+
+.flag-progress {
+  color: var(--muted);
+  margin: 0;
+}
+
+.flag-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+  max-width: 360px;
+  margin: 0.5rem auto 0;
+}
+
+.flag-legend__row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--muted);
+}
+
+.flag-legend__row.is-done {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.flag-legend__mark {
+  width: 1.2rem;
+  text-align: center;
+}
