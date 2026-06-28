@@ -578,3 +578,25 @@ h2 { font-size: 1.5rem; }
   width: 1.2rem;
   text-align: center;
 }
+
+.brand-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.brand-lockup__museum {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.brand-lockup__wordmark {
+  width: min(70vw, 280px);
+  height: auto;
+}
