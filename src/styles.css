@@ -1,15 +1,24 @@
+@font-face {
+  font-family: "Cal Sans";
+  src: url("./assets/CalSans-Regular.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
 :root {
-  --brand: #5b2a1e;
-  --brand-light: #8c4d3e;
-  --accent: #e6b45b;
-  --bg: #fbf6ed;
-  --fg: #1e1a17;
-  --muted: #6a5e55;
-  --surface: #ffffff;
-  --border: #d9cfc2;
+  --bg: #a1a1ce;
+  --badge: #775ba6;
+  --btn: #313178;
+  --btn-fg: #e8e7f4;
+  --fg: #26264f;
+  --muted: #4a4a73;
+  --headline: #ffffff;
+  --surface: #b4b4dc;
+  --border: #8888bd;
   --radius: 14px;
-  --shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow: 0 2px 6px rgba(20, 20, 60, 0.18);
   --tap-target: 56px;
+  --font-display: "Cal Sans", system-ui, sans-serif;
 }
 
 * {
@@ -59,8 +68,9 @@ button {
 
 h1, h2 {
   margin: 0 0 0.25rem;
-  color: var(--brand);
+  color: var(--fg);
   font-weight: 700;
+  font-family: var(--font-display);
 }
 
 h1 { font-size: 2rem; }
@@ -103,6 +113,7 @@ h2 { font-size: 1.5rem; }
   justify-content: center;
   gap: 0.5rem;
   transition: transform 0.05s ease, background 0.15s ease;
+  font-family: var(--font-display);
 }
 
 .btn:active {
@@ -116,9 +127,9 @@ h2 { font-size: 1.5rem; }
 }
 
 .btn--primary {
-  background: var(--brand);
-  color: #fff;
-  border-color: var(--brand);
+  background: var(--btn);
+  color: var(--btn-fg);
+  border-color: var(--btn);
 }
 
 .btn--tile {
