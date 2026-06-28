@@ -5,7 +5,7 @@ export function Welcome() {
   return (
     <main class="screen screen--center">
       <div class="brand-lockup">
-        <p class="brand-lockup__museum">Missouri History Museum</p>
+        <h1 class="brand-lockup__museum">Missouri History Museum</h1>
         <img
           class="brand-lockup__wordmark"
           src={`${import.meta.env.BASE_URL}brand/discovery-quest-wordmark.png`}

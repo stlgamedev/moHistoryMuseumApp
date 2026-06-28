@@ -175,7 +175,7 @@ h2 { font-size: 1.5rem; }
   width: 48px;
   height: 48px;
   border-radius: 999px;
-  background: var(--brand);
+  background: var(--btn);
   color: #fff;
   border: none;
   padding: 0;
@@ -211,7 +211,7 @@ h2 { font-size: 1.5rem; }
 }
 
 .menu-close {
-  background: var(--brand);
+  background: var(--btn);
   color: #fff;
   text-align: center;
 }
@@ -359,7 +359,7 @@ h2 { font-size: 1.5rem; }
 .brand-chip {
   display: inline-flex;
   align-items: center;
-  background: var(--brand);
+  background: var(--btn);
   padding: 0.5rem 0.9rem;
   border-radius: 10px;
   line-height: 0;
@@ -451,7 +451,7 @@ h2 { font-size: 1.5rem; }
 }
 
 .scanner-hint {
-  color: var(--accent);
+  color: var(--btn-fg);
   font-style: italic;
 }
 

@@ -5,7 +5,7 @@ interface Props {
   sectionId: string;
 }
 
-export function SectionRestored(_props: Props) {
+export function SectionRestored({ sectionId }: Props) {
   const restored = restoredSections.value;
   const count = restored.size;
   const total = sections.value.length;
@@ -14,7 +14,7 @@ export function SectionRestored(_props: Props) {
   return (
     <main class="screen screen--center">
       <h2>{allDone ? "You restored the whole flag!" : `You've restored ${count} section${count === 1 ? "" : "s"}!`}</h2>
-      <RestorableFlag restored={restored} />
+      <RestorableFlag restored={restored} reveal={sectionId} />
       <div class="stack stack--wide">
         <button class="btn btn--primary btn--big" onClick={() => go({ kind: "flag" })}>
           View Flag
