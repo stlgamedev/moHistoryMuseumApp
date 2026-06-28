@@ -1,8 +1,8 @@
-import { sections, earnedPatches, go } from "../state/game";
+import { sections, restoredSections, go } from "../state/game";
 
-export function Inventory() {
+export function Flag() {
   const all = sections.value;
-  const earned = earnedPatches.value;
+  const earned = restoredSections.value;
 
   return (
     <main class="screen">

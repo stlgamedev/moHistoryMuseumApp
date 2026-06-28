@@ -1,4 +1,4 @@
-import { go, sections, earnedPatches, ageTier } from "../state/game";
+import { go, sections, restoredSections, ageTier } from "../state/game";
 import { mode } from "../state/router";
 import { capabilities } from "../state/capabilities";
 
@@ -34,7 +34,7 @@ export function SectionSelect() {
       ) : (
         <div class="stack">
           {list.map((sec) => {
-            const earned = earnedPatches.value.has(sec.id);
+            const earned = restoredSections.value.has(sec.id);
             return (
               <button
                 key={sec.id}

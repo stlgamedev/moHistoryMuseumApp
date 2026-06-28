@@ -13,8 +13,8 @@ import { AgeSelect } from "./screens/AgeSelect";
 import { SectionSelect } from "./screens/SectionSelect";
 import { Question } from "./screens/Question";
 import { Hint } from "./screens/Hint";
-import { PatchEarned } from "./screens/PatchEarned";
-import { Inventory } from "./screens/Inventory";
+import { SectionRestored } from "./screens/SectionRestored";
+import { Flag } from "./screens/Flag";
 
 export function App() {
   useEffect(() => {
@@ -47,8 +47,8 @@ export function App() {
       {s.kind === "section-select" && <SectionSelect />}
       {s.kind === "question" && <Question sectionId={s.sectionId} questionIndex={s.questionIndex} />}
       {s.kind === "hint" && <Hint sectionId={s.sectionId} questionIndex={s.questionIndex} />}
-      {s.kind === "patch-earned" && <PatchEarned sectionId={s.sectionId} />}
-      {s.kind === "inventory" && <Inventory />}
+      {s.kind === "section-restored" && <SectionRestored sectionId={s.sectionId} />}
+      {s.kind === "flag" && <Flag />}
     </div>
   );
 }

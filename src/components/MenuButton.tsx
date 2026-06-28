@@ -23,7 +23,7 @@ export function MenuButton() {
       </button>
       {open && (
         <div class="menu-sheet" role="dialog" aria-label="Menu">
-          <button class="menu-item" onClick={() => { setOpen(false); go({ kind: "inventory" }); }}>
+          <button class="menu-item" onClick={() => { setOpen(false); go({ kind: "flag" }); }}>
             Patches / Inventory
           </button>
           <button class="menu-item" onClick={() => { setOpen(false); go({ kind: "section-select" }); }}>

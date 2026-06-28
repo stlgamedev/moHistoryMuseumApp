@@ -3,12 +3,16 @@ const KEY = "mohm-hunt-v1";
 export interface PersistedState {
   age?: number;
   ageTier?: string;
-  earnedPatches: string[]; // section ids
+  restoredSections: string[]; // section ids
   completedQuestions: string[]; // `${sectionId}:${questionId}`
 }
 
+interface LegacyState {
+  earnedPatches?: string[];
+}
+
 const DEFAULT: PersistedState = {
-  earnedPatches: [],
+  restoredSections: [],
   completedQuestions: [],
 };
 
@@ -16,8 +20,13 @@ export function loadPersisted(): PersistedState {
   try {
     const raw = localStorage.getItem(KEY);
     if (!raw) return { ...DEFAULT };
-    const parsed = JSON.parse(raw) as PersistedState;
-    return { ...DEFAULT, ...parsed };
+    const parsed = JSON.parse(raw) as PersistedState & LegacyState;
+    return {
+      ...DEFAULT,
+      ...parsed,
+      // Migrate pre-rebrand saves: earnedPatches -> restoredSections.
+      restoredSections: parsed.restoredSections ?? parsed.earnedPatches ?? [],
+    };
   } catch {
     return { ...DEFAULT };
   }

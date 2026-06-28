@@ -1,5 +1,5 @@
 import { useMemo, useState } from "preact/hooks";
-import { sections, ageTier, go, awardPatch, markComplete } from "../state/game";
+import { sections, ageTier, go, restoreSection, markComplete } from "../state/game";
 import { mode } from "../state/router";
 import { capabilities } from "../state/capabilities";
 import type { Question as Q, QuestionVariant, ScanBlock } from "../content/types";
@@ -49,8 +49,8 @@ export function Question({ sectionId, questionIndex }: Props) {
     if (nextIdx < section!.questions.length) {
       go({ kind: "question", sectionId: section!.id, questionIndex: nextIdx });
     } else {
-      awardPatch(section!.id);
-      go({ kind: "patch-earned", sectionId: section!.id });
+      restoreSection(section!.id);
+      go({ kind: "section-restored", sectionId: section!.id });
     }
   }
 

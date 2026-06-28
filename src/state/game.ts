@@ -16,21 +16,21 @@ export type Screen =
   | { kind: "section-select" }
   | { kind: "question"; sectionId: string; questionIndex: number }
   | { kind: "hint"; sectionId: string; questionIndex: number }
-  | { kind: "patch-earned"; sectionId: string }
-  | { kind: "inventory" };
+  | { kind: "section-restored"; sectionId: string }
+  | { kind: "flag" };
 
 const persisted = loadPersisted();
 
 export const screen = signal<Screen>({ kind: "welcome" });
 export const age = signal<number | undefined>(persisted.age);
 export const ageTier = signal<AgeTier | undefined>(validTier(persisted.ageTier));
-export const earnedPatches = signal<Set<string>>(new Set(persisted.earnedPatches));
+export const restoredSections = signal<Set<string>>(new Set(persisted.restoredSections));
 export const completedQuestions = signal<Set<string>>(new Set(persisted.completedQuestions));
 export const sections = signal<Section[]>([]);
 
 export const activeSection = computed<Section | undefined>(() => {
   const s = screen.value;
-  if (s.kind !== "question" && s.kind !== "hint" && s.kind !== "patch-earned") return undefined;
+  if (s.kind !== "question" && s.kind !== "hint" && s.kind !== "section-restored") return undefined;
   return sections.value.find((x) => x.id === s.sectionId);
 });
 
@@ -39,7 +39,7 @@ effect(() => {
   const state: PersistedState = {
     age: age.value,
     ageTier: ageTier.value,
-    earnedPatches: [...earnedPatches.value],
+    restoredSections: [...restoredSections.value],
     completedQuestions: [...completedQuestions.value],
   };
   savePersisted(state);
@@ -67,10 +67,10 @@ export function selectAgeTier(tier: AgeTier): void {
   }
 }
 
-export function awardPatch(sectionId: string): void {
-  const next = new Set(earnedPatches.value);
+export function restoreSection(sectionId: string): void {
+  const next = new Set(restoredSections.value);
   next.add(sectionId);
-  earnedPatches.value = next;
+  restoredSections.value = next;
 }
 
 export function markComplete(sectionId: string, questionId: string): void {
@@ -84,7 +84,7 @@ export function resetAll(): void {
   resetPersisted();
   age.value = undefined;
   ageTier.value = undefined;
-  earnedPatches.value = new Set();
+  restoredSections.value = new Set();
   completedQuestions.value = new Set();
   screen.value = { kind: "welcome" };
 }
