@@ -1,15 +1,24 @@
+@font-face {
+  font-family: "Cal Sans";
+  src: url("./assets/CalSans-Regular.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
 :root {
-  --brand: #5b2a1e;
-  --brand-light: #8c4d3e;
-  --accent: #e6b45b;
-  --bg: #fbf6ed;
-  --fg: #1e1a17;
-  --muted: #6a5e55;
-  --surface: #ffffff;
-  --border: #d9cfc2;
+  --bg: #a1a1ce;
+  --badge: #775ba6;
+  --btn: #313178;
+  --btn-fg: #e8e7f4;
+  --fg: #26264f;
+  --muted: #4a4a73;
+  --headline: #ffffff;
+  --surface: #b4b4dc;
+  --border: #8888bd;
   --radius: 14px;
-  --shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow: 0 2px 6px rgba(20, 20, 60, 0.18);
   --tap-target: 56px;
+  --font-display: "Cal Sans", system-ui, sans-serif;
 }
 
 * {
@@ -59,8 +68,9 @@ button {
 
 h1, h2 {
   margin: 0 0 0.25rem;
-  color: var(--brand);
+  color: var(--fg);
   font-weight: 700;
+  font-family: var(--font-display);
 }
 
 h1 { font-size: 2rem; }
@@ -103,6 +113,7 @@ h2 { font-size: 1.5rem; }
   justify-content: center;
   gap: 0.5rem;
   transition: transform 0.05s ease, background 0.15s ease;
+  font-family: var(--font-display);
 }
 
 .btn:active {
@@ -116,9 +127,9 @@ h2 { font-size: 1.5rem; }
 }
 
 .btn--primary {
-  background: var(--brand);
-  color: #fff;
-  border-color: var(--brand);
+  background: var(--btn);
+  color: var(--btn-fg);
+  border-color: var(--btn);
 }
 
 .btn--tile {
@@ -127,9 +138,34 @@ h2 { font-size: 1.5rem; }
 }
 
 .badge {
-  font-size: 0.8rem;
-  color: var(--accent);
-  font-weight: 600;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(78vw, 320px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.badge__star {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 10px rgba(20, 20, 60, 0.25));
+}
+
+.badge__text {
+  position: relative;
+  z-index: 1;
+  width: 64%;
+  text-align: center;
+  color: var(--headline);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 .menu-fab {
@@ -139,7 +175,7 @@ h2 { font-size: 1.5rem; }
   width: 48px;
   height: 48px;
   border-radius: 999px;
-  background: var(--brand);
+  background: var(--btn);
   color: #fff;
   border: none;
   padding: 0;
@@ -175,7 +211,7 @@ h2 { font-size: 1.5rem; }
 }
 
 .menu-close {
-  background: var(--brand);
+  background: var(--btn);
   color: #fff;
   text-align: center;
 }
@@ -323,7 +359,7 @@ h2 { font-size: 1.5rem; }
 .brand-chip {
   display: inline-flex;
   align-items: center;
-  background: var(--brand);
+  background: var(--btn);
   padding: 0.5rem 0.9rem;
   border-radius: 10px;
   line-height: 0;
@@ -415,7 +451,7 @@ h2 { font-size: 1.5rem; }
 }
 
 .scanner-hint {
-  color: var(--accent);
+  color: var(--btn-fg);
   font-style: italic;
 }
 
@@ -481,4 +517,93 @@ h2 { font-size: 1.5rem; }
   border-radius: var(--radius);
   font-size: 0.95rem;
   line-height: 1.35;
+}
+
+.stack--wide {
+  width: 100%;
+  max-width: 360px;
+}
+
+.flag {
+  position: relative;
+  width: min(92vw, 480px);
+  aspect-ratio: 958 / 661;
+  margin: 0 auto;
+}
+
+.flag__base,
+.flag__cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.flag__cover {
+  transition: opacity 600ms ease;
+}
+
+.flag--sm {
+  width: min(60vw, 220px);
+}
+
+.flag-progress {
+  color: var(--muted);
+  margin: 0;
+}
+
+.flag-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+  max-width: 360px;
+  margin: 0.5rem auto 0;
+}
+
+.flag-legend__row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--muted);
+}
+
+.flag-legend__row.is-done {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.flag-legend__mark {
+  width: 1.2rem;
+  text-align: center;
+}
+
+.brand-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.brand-lockup__museum {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.brand-lockup__wordmark {
+  width: min(70vw, 280px);
+  height: auto;
+}
+
+.badge-done {
+  font-size: 0.8rem;
+  color: var(--headline);
+  opacity: 0.85;
+  font-weight: 600;
 }
