@@ -1,9 +1,17 @@
+import { useEffect } from "preact/hooks";
 import { go, sections, restoredSections, ageTier } from "../state/game";
 import { mode } from "../state/router";
 import { capabilities } from "../state/capabilities";
 import { RestorableFlag } from "../components/RestorableFlag";
 
 export function SectionSelect() {
+  // Questions are age-tier specific, so an age is required first. If we somehow
+  // land here without one (e.g. "Change Section" before ever picking), route
+  // straight to the age picker instead of showing a dead-end screen.
+  useEffect(() => {
+    if (!ageTier.value) go({ kind: "age-select" });
+  }, []);
+
   const list = sections.value;
   const caps = capabilities.value;
   const scanRequestedButBlocked =
@@ -15,14 +23,8 @@ export function SectionSelect() {
         ? "Camera access was blocked. We'll use the classic questions; reload the page to try camera mode again."
         : "Camera wasn't available. We'll use the classic questions for now.";
 
-  if (!ageTier.value) {
-    return (
-      <main class="screen">
-        <h2>Pick an age first</h2>
-        <button class="btn btn--primary" onClick={() => go({ kind: "age-select" })}>Go</button>
-      </main>
-    );
-  }
+  // Redirecting to age-select (see effect above) — render nothing this frame.
+  if (!ageTier.value) return null;
 
   return (
     <main class="screen">
