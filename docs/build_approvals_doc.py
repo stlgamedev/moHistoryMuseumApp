@@ -143,13 +143,13 @@ def section_block(doc, section):
 def cover(doc, sections_data):
     heading(
         doc,
-        "Question Approvals",
+        "Discovery Quest — Question Approvals",
         size=22,
         align=WD_ALIGN_PARAGRAPH.CENTER,
     )
     heading(
         doc,
-        "Missouri History Museum Scavenger Hunt",
+        "Missouri History Museum",
         size=13,
         color=GREY,
         align=WD_ALIGN_PARAGRAPH.CENTER,
