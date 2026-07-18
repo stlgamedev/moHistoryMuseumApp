@@ -1,0 +1,158 @@
+{
+  "id": "stlgamedev",
+  "name": "STLGameDev",
+  "patchName": "STLGameDev Patch",
+  "patchImage": "patch.svg",
+  "description": "Meet the game studios of St. Louis.",
+  "questions": [
+    {
+      "id": "butterscotch-shenanigans",
+      "topic": "Butterscotch Shenanigans",
+      "hintText": "In the lower level, look for Butterscotch Shenanigans.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "How many brothers make up Butterscotch Shenanigans?",
+          "choices": [
+            { "label": "1" },
+            { "label": "2" },
+            { "label": "3", "correct": true }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "How many brothers make up Butterscotch Shenanigans?",
+          "choices": [
+            { "label": "2" },
+            { "label": "3", "correct": true },
+            { "label": "4" }
+          ],
+          "scan": {
+            "prompt": "Find the Butterscotch Shenanigans logo.",
+            "hintText": "Look for the Butterscotch Shenanigans sign in the lower level.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Butterscotch", "Shenanigans", "BUTTERSCOTCH", "SHENANIGANS"]
+            }
+          }
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "How many brothers make up Butterscotch Shenanigans?",
+          "answer": "3",
+          "acceptableAnswers": ["three"]
+        }
+      ]
+    },
+    {
+      "id": "tj-hughes",
+      "topic": "TJ Hughes",
+      "hintText": "In the lower level, look for TJ Hughes!",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "TJ Hughes created a game that plays with what?",
+          "choices": [
+            { "label": "Cars" },
+            { "label": "People" },
+            { "label": "Food", "correct": true }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "What is the name of TJ Hughes' game?",
+          "choices": [
+            { "label": "Nour", "correct": true },
+            { "label": "Noodleman" },
+            { "label": "Ice Cream Blitz" }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "What is the name of TJ Hughes' game?",
+          "answer": "Nour"
+        }
+      ]
+    },
+    {
+      "id": "graphite-lab",
+      "topic": "Graphite Lab",
+      "hintText": "In the lower level, look for Graphite Lab!",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "Graphite Lab created a game where you serve food called what?",
+          "choices": [
+            { "label": "Chop Chop", "correct": true },
+            { "label": "Push Push" },
+            { "label": "Sit Sit" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "How many games has Graphite Lab developed?",
+          "choices": [
+            { "label": "5" },
+            { "label": "200", "correct": true },
+            { "label": "1000" }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "Graphite Lab has created games for what major publisher?",
+          "answer": "Atari"
+        }
+      ]
+    },
+    {
+      "id": "stlgamedev-aliens",
+      "topic": "STLGameDev",
+      "hintText": "In the lower level, look for the little aliens!",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "What is the name of STLGameDev's purple alien?",
+          "choices": [
+            { "label": "Zeepo" },
+            { "label": "Grunkle" },
+            { "label": "Plorp", "correct": true }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "What is the name of STLGameDev's purple alien?",
+          "choices": [
+            { "label": "Zeepo" },
+            { "label": "Grunkle" },
+            { "label": "Plorp", "correct": true }
+          ],
+          "scan": {
+            "prompt": "Scan the STLGameDev logo!",
+            "hintText": "Find the STL GAMEDEV logo in the lower level.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["GAMEDEV", "GAME DEV", "STLGAMEDEV", "STL"]
+            }
+          }
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "What is the name of STLGameDev's purple alien?",
+          "answer": "Plorp"
+        }
+      ]
+    }
+  ]
+}

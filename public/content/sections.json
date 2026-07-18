@@ -6,6 +6,7 @@
     { "id": "collected", "path": "collected/section.json" },
     { "id": "made-in-stl", "path": "made-in-stl/section.json" },
     { "id": "route-66", "path": "route-66/section.json" },
-    { "id": "st-louis-sound", "path": "st-louis-sound/section.json" }
+    { "id": "st-louis-sound", "path": "st-louis-sound/section.json" },
+    { "id": "stlgamedev", "path": "stlgamedev/section.json" }
   ]
 }
