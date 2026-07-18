@@ -1,15 +1,18 @@
 // Maps each section to the flag cover layer(s) it removes when completed.
-// All 7 covers are assigned across the 5 sections so a fully-completed game
-// reveals the whole flag. Grouping is provisional — verify visually in Task 6
-// and swap cover ids between sections if the reveal order looks unbalanced.
+// There are 7 cover layers and 7 sections, so this is a clean 1:1 map — each
+// section restores exactly one region, and a fully-completed game reveals the
+// whole flag. (If an STLGameDev section is later added for the center disc,
+// re-shuffle these assignments.)
 const BASE = import.meta.env.BASE_URL;
 
 export const SECTION_COVERS: Record<string, string[]> = {
   "worlds-fair": ["cover-topright"],
   "marvel-in-motion": ["cover-botright"],
-  "forest-park-150": ["cover-left", "cover-topleft"],
-  "collected": ["cover-botleft", "cover-river"],
+  "forest-park-150": ["cover-left"],
+  "collected": ["cover-botleft"],
   "made-in-stl": ["cover-disc"],
+  "route-66": ["cover-topleft"],
+  "st-louis-sound": ["cover-river"],
 };
 
 export const FLAG_COVERS: string[] = Object.values(SECTION_COVERS).flat();

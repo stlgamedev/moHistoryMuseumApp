@@ -1,0 +1,43 @@
+{
+  "id": "st-louis-sound",
+  "name": "St. Louis Sound",
+  "patchName": "St. Louis Sound Patch",
+  "patchImage": "patch.svg",
+  "description": "The artists who gave St. Louis its sound.",
+  "questions": [
+    {
+      "id": "famous-artists",
+      "topic": "Famous Artists",
+      "hintText": "Do you hear that sound? Look for the St. Louis Sound logo.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "What instrument did famous jazz musician Miles Davis play?",
+          "choices": [
+            { "label": "Trumpet", "correct": true },
+            { "label": "Saxophone" },
+            { "label": "Piano" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "Where was the famous dancer, singer, and resistance fighter Josephine Baker born?",
+          "choices": [
+            { "label": "Chesterfield" },
+            { "label": "South City" },
+            { "label": "Mill Creek Valley", "correct": true }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "Which St. Louis R&B legend was born Anna Mae Bullock?",
+          "answer": "Tina Turner",
+          "acceptableAnswers": ["Tina"]
+        }
+      ]
+    }
+  ]
+}

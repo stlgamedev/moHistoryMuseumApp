@@ -1,0 +1,43 @@
+{
+  "id": "route-66",
+  "name": "Route 66",
+  "patchName": "Route 66 Patch",
+  "patchImage": "patch.svg",
+  "description": "Get your kicks on the Mother Road.",
+  "questions": [
+    {
+      "id": "on-the-road",
+      "topic": "On the Road",
+      "hintText": "This is where you go to 'get your kicks' — look for the Route 66 logo.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "What is the name of the iconic ice cream place on Route 66?",
+          "choices": [
+            { "label": "Ted Drewes", "correct": true },
+            { "label": "Arnold's" },
+            { "label": "McFrosty" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "How many states does Route 66 go through?",
+          "choices": [
+            { "label": "5" },
+            { "label": "8", "correct": true },
+            { "label": "7" }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "Who decided to call it \"Route 66\"?",
+          "answer": "Cyrus Avery",
+          "acceptableAnswers": ["Avery"]
+        }
+      ]
+    }
+  ]
+}
