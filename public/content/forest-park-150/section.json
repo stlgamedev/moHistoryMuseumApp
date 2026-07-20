@@ -76,6 +76,39 @@
           "acceptableAnswers": ["Lambert", "Albert Lambert", "A. B. Lambert"]
         }
       ]
+    },
+    {
+      "id": "what-is-forest-park",
+      "topic": "What is Forest Park",
+      "hintText": "Look near the stairs for the 'What is Forest Park?' label.",
+      "variants": [
+        {
+          "type": "multi-text",
+          "ageTier": "youth",
+          "prompt": "Finish this sentence: Forest Park is a place to...",
+          "choices": [
+            { "label": "Play", "correct": true },
+            { "label": "Sleep" },
+            { "label": "Be bored" }
+          ]
+        },
+        {
+          "type": "multi-text",
+          "ageTier": "teen",
+          "prompt": "What year did Richard Hudlin file his landmark case to desegregate St. Louis tennis facilities?",
+          "choices": [
+            { "label": "1968" },
+            { "label": "1920" },
+            { "label": "1945", "correct": true }
+          ]
+        },
+        {
+          "type": "fill-blank",
+          "ageTier": "adult",
+          "prompt": "As of 2025, how many statues are in Forest Park?",
+          "answer": "23"
+        }
+      ]
     }
   ]
 }

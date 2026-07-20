@@ -38,40 +38,6 @@
           "acceptableAnswers": ["Frutzola"]
         }
       ]
-    },
-    {
-      "id": "build-a-bear",
-      "topic": "Build-A-Bear",
-      "hintText": "Look in the Made in St. Louis gallery.",
-      "variants": [
-        {
-          "type": "multi-text",
-          "ageTier": "youth",
-          "prompt": "What is the name of the Build-A-Bear teddy bear in the display case?",
-          "choices": [
-            { "label": "Bearemy", "correct": true },
-            { "label": "Fluffy McFlufferson" },
-            { "label": "Louie" }
-          ]
-        },
-        {
-          "type": "multi-text",
-          "ageTier": "teen",
-          "prompt": "Where did Maxine Clark open the first Build-A-Bear store in 1997?",
-          "choices": [
-            { "label": "Downtown Kirkwood" },
-            { "label": "Busch Stadium" },
-            { "label": "The St. Louis Galleria", "correct": true }
-          ]
-        },
-        {
-          "type": "fill-blank",
-          "ageTier": "adult",
-          "prompt": "How many Build-A-Bear stores operate around the world today?",
-          "answer": "500",
-          "acceptableAnswers": ["500 stores", "around 500", "about 500"]
-        }
-      ]
     }
   ]
 }
