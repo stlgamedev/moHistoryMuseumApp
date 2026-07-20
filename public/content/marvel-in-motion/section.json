@@ -18,7 +18,15 @@
             { "label": "School bus", "correct": true },
             { "label": "Airplane" },
             { "label": "Swimming pool" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Point your camera at the replica Ferris wheel car!",
+            "hintText": "Find the replica car in the exhibit — it's as big as a school bus.",
+            "verification": {
+              "kind": "object",
+              "classes": ["school bus", "minibus", "trolleybus"]
+            }
+          }
         },
         {
           "type": "multi-text",
