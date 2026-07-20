@@ -108,7 +108,15 @@
             { "label": "Camel", "correct": true },
             { "label": "Dog" },
             { "label": "Bird" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find the man riding a camel — point your camera at the camel!",
+            "hintText": "Look for the camel in the World's Fair exhibit.",
+            "verification": {
+              "kind": "object",
+              "classes": ["camel", "Arabian camel", "dromedary"]
+            }
+          }
         },
         {
           "type": "multi-text",
