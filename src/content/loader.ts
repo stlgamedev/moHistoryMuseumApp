@@ -36,13 +36,27 @@ function resolveAssetPaths(section: Section, relPath: string): Section {
       ...q,
       hintImage: resolve(q.hintImage),
       variants: q.variants.map((v) => {
-        if (v.type === "multi-image" || v.type === "multi-text") {
+        // Resolve an image-scan's reference image path the same way as other assets.
+        const withScan =
+          v.scan && v.scan.verification.kind === "image"
+            ? {
+                ...v,
+                scan: {
+                  ...v.scan,
+                  verification: {
+                    ...v.scan.verification,
+                    ref: resolve(v.scan.verification.ref) ?? v.scan.verification.ref,
+                  },
+                },
+              }
+            : v;
+        if (withScan.type === "multi-image" || withScan.type === "multi-text") {
           return {
-            ...v,
-            choices: v.choices.map((c) => ({ ...c, image: resolve(c.image) })),
+            ...withScan,
+            choices: withScan.choices.map((c) => ({ ...c, image: resolve(c.image) })),
           };
         }
-        return v;
+        return withScan;
       }),
     })),
   };

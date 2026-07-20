@@ -139,10 +139,11 @@
           ],
           "scan": {
             "prompt": "Scan the STLGameDev logo!",
-            "hintText": "Find the STL GAMEDEV logo in the lower level.",
+            "hintText": "Fill the frame with the STL GAMEDEV logo in the lower level.",
             "verification": {
-              "kind": "ocr",
-              "anyOf": ["GAMEDEV", "GAME DEV", "STLGAMEDEV", "STL"]
+              "kind": "image",
+              "ref": "images/stlgamedev-logo.png",
+              "minSimilarity": 0.6
             }
           }
         },

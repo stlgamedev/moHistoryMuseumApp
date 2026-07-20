@@ -27,7 +27,8 @@ export interface MultiChoiceOption {
 
 export type ScanVerification =
   | { kind: "ocr"; anyOf: string[] }
-  | { kind: "object"; classes: string[] };
+  | { kind: "object"; classes: string[] }
+  | { kind: "image"; ref: string; minSimilarity?: number };
 
 export interface ScanBlock {
   prompt: string;

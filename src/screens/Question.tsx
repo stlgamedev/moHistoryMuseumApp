@@ -5,6 +5,7 @@ import { capabilities } from "../state/capabilities";
 import type { Question as Q, QuestionVariant, ScanBlock } from "../content/types";
 import { TextScanner } from "../components/TextScanner";
 import { ObjectScanner } from "../components/ObjectScanner";
+import { ImageScanner } from "../components/ImageScanner";
 import { StarburstBadge } from "../components/StarburstBadge";
 
 interface Props {
@@ -80,6 +81,19 @@ export function Question({ sectionId, questionIndex }: Props) {
       return (
         <TextScanner
           targets={v.anyOf}
+          prompt={scan.prompt}
+          hintText={scan.hintText}
+          onMatch={advance}
+          onCancel={() => go({ kind: "hint", sectionId, questionIndex })}
+          onFallbackToClassic={noopFallback}
+        />
+      );
+    }
+    if (v.kind === "image") {
+      return (
+        <ImageScanner
+          refImage={v.ref}
+          minSimilarity={v.minSimilarity}
           prompt={scan.prompt}
           hintText={scan.hintText}
           onMatch={advance}
