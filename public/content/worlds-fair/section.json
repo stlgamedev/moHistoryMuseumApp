@@ -89,7 +89,7 @@
         {
           "type": "fill-blank",
           "ageTier": "adult",
-          "prompt": "What was the name of Young Spartan painter's great-grandfather who was a waiter and guide at the fair?",
+          "prompt": "What was the name of Young Spartan painter Ria Unson's great-grandfather, who was a waiter and guide at the fair?",
           "answer": "Ramon Ochoa",
           "acceptableAnswers": ["Ochoa", "Ramón Ochoa"]
         }

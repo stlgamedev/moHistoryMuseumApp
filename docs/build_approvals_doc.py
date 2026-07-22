@@ -74,11 +74,12 @@ def fmt_choices(choices):
 
 def fmt_scan(scan):
     v = scan["verification"]
-    target = (
-        "Words: " + ", ".join(v["anyOf"])
-        if v["kind"] == "ocr"
-        else "Object: " + ", ".join(v["classes"])
-    )
+    if v["kind"] == "ocr":
+        target = "Words: " + ", ".join(v["anyOf"])
+    elif v["kind"] == "object":
+        target = "Object: " + ", ".join(v["classes"])
+    else:  # image
+        target = f"Image match: {v['ref']}"
     return f"{scan['prompt']}  →  {target}"
 
 

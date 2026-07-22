@@ -35,7 +35,7 @@
           "ageTier": "adult",
           "prompt": "Who decided to call it \"Route 66\"?",
           "answer": "Cyrus Avery",
-          "acceptableAnswers": ["Avery"]
+          "acceptableAnswers": ["Avery", "Cy Avery", "Cy"]
         }
       ]
     }
