@@ -84,14 +84,32 @@
             { "label": "Carousel" },
             { "label": "The Wizard of Oz" },
             { "label": "Meet Me in St. Louis", "correct": true }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find the \"Meet Me in St. Louis\" movie poster!",
+            "hintText": "Look for the bright yellow movie poster and fill the frame with it.",
+            "verification": {
+              "kind": "image",
+              "ref": "images/movie-poster.jpg",
+              "minSimilarity": 0.6
+            }
+          }
         },
         {
           "type": "fill-blank",
           "ageTier": "adult",
           "prompt": "What was the name of Young Spartan painter Ria Unson's great-grandfather, who was a waiter and guide at the fair?",
           "answer": "Ramon Ochoa",
-          "acceptableAnswers": ["Ochoa", "Ramón Ochoa"]
+          "acceptableAnswers": ["Ochoa", "Ramón Ochoa"],
+          "scan": {
+            "prompt": "Find the \"Young Spartan\" painting!",
+            "hintText": "Look for the framed painting of four figures at the fair.",
+            "verification": {
+              "kind": "image",
+              "ref": "images/young-spartan.jpg",
+              "minSimilarity": 0.6
+            }
+          }
         }
       ]
     },

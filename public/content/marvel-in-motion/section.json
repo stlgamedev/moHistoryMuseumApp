@@ -36,7 +36,16 @@
             { "label": "John Jacob Ferris" },
             { "label": "George Washington Ferris", "correct": true },
             { "label": "Cooper Collin Ferris" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find the photo of George Ferris!",
+            "hintText": "Look for the portrait of the man who invented the Ferris wheel.",
+            "verification": {
+              "kind": "image",
+              "ref": "images/george-ferris.jpg",
+              "minSimilarity": 0.6
+            }
+          }
         },
         {
           "type": "fill-blank",
