@@ -8,6 +8,7 @@
     {
       "id": "ferris-wheel",
       "topic": "The 1904 World's Fair Ferris Wheel",
+      "hintImage": "images/ferris-model.jpg",
       "hintText": "Look for the Ferris wheel display.",
       "variants": [
         {

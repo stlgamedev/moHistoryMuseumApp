@@ -8,6 +8,7 @@
     {
       "id": "reddi-wip",
       "topic": "Reddi-Wip",
+      "hintImage": "images/reddi-wip.jpg",
       "hintText": "Take a look inside the refrigerator in the Made in St. Louis gallery.",
       "variants": [
         {
@@ -18,7 +19,15 @@
             { "label": "Sprite" },
             { "label": "Starry" },
             { "label": "7Up", "correct": true }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find the 7Up in the exhibit!",
+            "hintText": "Look for the 7Up bottle in the refrigerator display.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["7Up", "7 Up", "7UP", "Seven Up"]
+            }
+          }
         },
         {
           "type": "multi-text",
@@ -28,14 +37,30 @@
             { "label": "Reddi-Wip", "correct": true },
             { "label": "Ice cream cones" },
             { "label": "7Up" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find the Reddi-Wip in the exhibit!",
+            "hintText": "Look for the Reddi-Wip can in the refrigerator display.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Reddi-Wip", "Reddi Wip", "Reddiwip", "Reddi"]
+            }
+          }
         },
         {
           "type": "fill-blank",
           "ageTier": "adult",
           "prompt": "What was the name of the drink mix that eventually became Pixy Stix?",
           "answer": "Fruzola",
-          "acceptableAnswers": ["Frutzola"]
+          "acceptableAnswers": ["Frutzola"],
+          "scan": {
+            "prompt": "Find the label about SweeTarts & Pixy Stix.",
+            "hintText": "Look for the panel mentioning Fruzola and Pixy Stix.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Fruzola", "Pixy Stix", "SweeTarts", "Sunline"]
+            }
+          }
         }
       ]
     }

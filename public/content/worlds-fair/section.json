@@ -8,6 +8,7 @@
     {
       "id": "buildings",
       "topic": "Buildings",
+      "hintImage": "images/lion-head.jpg",
       "hintText": "Look for the lion's head.",
       "variants": [
         {
@@ -87,11 +88,10 @@
           ],
           "scan": {
             "prompt": "Find the \"Meet Me in St. Louis\" movie poster!",
-            "hintText": "Look for the bright yellow movie poster and fill the frame with it.",
+            "hintText": "Look for the bright yellow movie poster.",
             "verification": {
-              "kind": "image",
-              "ref": "images/movie-poster.jpg",
-              "minSimilarity": 0.6
+              "kind": "ocr",
+              "anyOf": ["Meet Me in St. Louis", "MEET ME IN ST", "Judy Garland", "Technicolor"]
             }
           }
         },
@@ -116,6 +116,7 @@
     {
       "id": "going-to-the-fair",
       "topic": "Going to the fair",
+      "hintImage": "images/push-chair.jpg",
       "hintText": "Look for an interesting way to get around — like the push chair.",
       "variants": [
         {

@@ -8,6 +8,7 @@
     {
       "id": "history-of-the-park",
       "topic": "Forest Park at 150",
+      "hintImage": "images/history-of-park.jpg",
       "hintText": "Check the 'History of the Park' section.",
       "variants": [
         {
@@ -46,6 +47,7 @@
     {
       "id": "park-mural",
       "topic": "Park Mural",
+      "hintImage": "images/i-love-stl.jpg",
       "hintText": "Find the 'I ♥ STL' sign in the 'A Park for All Seasons' mural.",
       "variants": [
         {
@@ -80,6 +82,7 @@
     {
       "id": "what-is-forest-park",
       "topic": "What is Forest Park",
+      "hintImage": "images/what-is-forest-park.jpg",
       "hintText": "Look near the stairs for the 'What is Forest Park?' label.",
       "variants": [
         {

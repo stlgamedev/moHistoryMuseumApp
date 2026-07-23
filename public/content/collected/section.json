@@ -8,6 +8,7 @@
     {
       "id": "iron-lung",
       "topic": "The Iron Lung",
+      "hintImage": "images/iron-lung.jpg",
       "hintText": "Look for the yellow iron lung in the Collected gallery.",
       "variants": [
         {
@@ -41,6 +42,7 @@
     {
       "id": "greenland-inuit-sledge",
       "topic": "Greenland Inuit Sledge",
+      "hintImage": "images/sledge.jpg",
       "hintText": "Look for the wooden sledge in the Collected gallery.",
       "variants": [
         {
@@ -75,6 +77,7 @@
     {
       "id": "intaglio-printing-press",
       "topic": "Intaglio Printing Press",
+      "hintImage": "images/printing-press.jpg",
       "hintText": "Look for the large spokes of the printing press in the Collected gallery.",
       "variants": [
         {

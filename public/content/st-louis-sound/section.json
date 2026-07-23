@@ -8,7 +8,7 @@
     {
       "id": "famous-artists",
       "topic": "Famous Artists",
-      "hintText": "Do you hear that sound? Look for the St. Louis Sound logo.",
+      "hintText": "Do you hear that sound? Look for the St. Louis Sound murals.",
       "variants": [
         {
           "type": "multi-text",
@@ -18,7 +18,15 @@
             { "label": "Trumpet", "correct": true },
             { "label": "Saxophone" },
             { "label": "Piano" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find the Miles Davis mural!",
+            "hintText": "Look for the mural with Miles Davis's name.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Miles Davis", "MILES DAVIS", "Davis"]
+            }
+          }
         },
         {
           "type": "multi-text",
@@ -28,14 +36,30 @@
             { "label": "Chesterfield" },
             { "label": "South City" },
             { "label": "Mill Creek Valley", "correct": true }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find the Josephine Baker mural!",
+            "hintText": "Look for the mural with Josephine Baker's name.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Josephine Baker", "JOSEPHINE BAKER", "Baker"]
+            }
+          }
         },
         {
           "type": "fill-blank",
           "ageTier": "adult",
           "prompt": "Which St. Louis R&B legend was born Anna Mae Bullock?",
           "answer": "Tina Turner",
-          "acceptableAnswers": ["Tina"]
+          "acceptableAnswers": ["Tina"],
+          "scan": {
+            "prompt": "Find the Tina Turner display!",
+            "hintText": "Look for Tina Turner's name.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Tina Turner", "TINA TURNER", "Anna Mae Bullock"]
+            }
+          }
         }
       ]
     }

@@ -8,6 +8,7 @@
     {
       "id": "on-the-road",
       "topic": "On the Road",
+      "hintImage": "images/route-66-logo.jpg",
       "hintText": "This is where you go to 'get your kicks' — look for the Route 66 logo.",
       "variants": [
         {
@@ -18,7 +19,15 @@
             { "label": "Ted Drewes", "correct": true },
             { "label": "Arnold's" },
             { "label": "McFrosty" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find the Ted Drewes sign!",
+            "hintText": "Look for the Ted Drewes Frozen Custard display.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Ted Drewes", "Ted Drews", "Drewes", "Frozen Custard"]
+            }
+          }
         },
         {
           "type": "multi-text",
@@ -28,14 +37,30 @@
             { "label": "5" },
             { "label": "8", "correct": true },
             { "label": "7" }
-          ]
+          ],
+          "scan": {
+            "prompt": "Find the Route 66 panel that lists the states it crosses.",
+            "hintText": "Look for the sign about Route 66 touching 8 states.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["8 states", "eight states", "100 cities", "Chicago to Los Angeles"]
+            }
+          }
         },
         {
           "type": "fill-blank",
           "ageTier": "adult",
           "prompt": "Who decided to call it \"Route 66\"?",
           "answer": "Cyrus Avery",
-          "acceptableAnswers": ["Avery", "Cy Avery", "Cy"]
+          "acceptableAnswers": ["Avery", "Cy Avery", "Cy"],
+          "scan": {
+            "prompt": "Find the plaque about the \"Father of Route 66\".",
+            "hintText": "Look for the label naming Cy (Cyrus) Avery.",
+            "verification": {
+              "kind": "ocr",
+              "anyOf": ["Cyrus Avery", "Cy Avery", "Father of Route 66", "Avery"]
+            }
+          }
         }
       ]
     }
